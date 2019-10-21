@@ -1,0 +1,22 @@
+.login_title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.margin-zero{
+    margin-right: 0px;
+}
+
+.field-margin{
+    margin-top:20px;
+}
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+.level-margin{
+    margin-top:20px;
+}
+

@@ -1,0 +1,16 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["standard", "standard-react", "prettier"],
+  "rules": { 
+    "react/jsx-no-bind": 0,
+    "react/prop-types": 0
+  },
+  "env": {
+    "browser": true
+  },
+  "globals":{
+    "API_URL": true,
+    "HOST_URL":true
+  }
+}
+
