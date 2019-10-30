@@ -1,6 +1,26 @@
 @import "../variable.scss";
 
-.sidenav{
+.btn-mobile-menu{
+    display:none;
+    position:fixed;
+    z-index:9999;
+    top:0;
+    right:0;
+    left:0;
+    width:100%;
+    height:35px;
+    background: #2a3842;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    text-align:center;
+}
+
+.btn-mobile-menu__icon{
+    position:relative;
+    top:10px;
+    color:#FFF;
+}
+
+.sidenav-wrapper{
     display:block;
     background-color: #2a3842;
     width:80px;
@@ -10,6 +30,9 @@
     text-align: center;
     position:fixed;
     padding-top: 20px;
+}
+.sidenav-wrapper.visible{
+    display: block;
 }
 
 .sidenav__menu{
