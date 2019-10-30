@@ -19,7 +19,11 @@
     top:10px;
     color:#FFF;
 }
-
+@media all and (max-width: 960px) {
+.btn-mobile-menu {
+    display: block;
+ }
+ 
 .sidenav-wrapper{
     display:block;
     background-color: #2a3842;
@@ -51,4 +55,5 @@
 }
 .sidenav__menu-list--white:hover{
     color:#0080cc;
+}
 }
