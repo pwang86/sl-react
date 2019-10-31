@@ -34,50 +34,52 @@ class SideNav extends React.PureComponent {
     });
 
     return (
-      <aside className={sideNavWrapperClass}>
-        <ul className="sidenav__menu">
-          <li className="sidenav__menu-list">
-            <NavLink className="sidenav__menu-list--white" to="/dashboard">
-              <div>
+      <div className={sideNavWrapperClass}>
+        <aside className="cover-sidenav">
+          <ul className="sidenav__menu">
+            <li className="sidenav__menu-list">
+              <NavLink className="sidenav__menu-list--white" to="/dashboard">
                 <div>
-                  <span className="icon">
-                    <i className="fas fa-home fa-2x" />
-                  </span>
+                  <div>
+                    <span className="icon">
+                      <i className="fas fa-home fa-2x" />
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div>Dashboard</div>
-            </NavLink>
-          </li>
-          <li className="sidenav__menu-list">
-            <NavLink
-              className="sidenav__menu-list--white"
-              to="/record"
-              // onClick={() => window.location.reload()}
-            >
-              <div>
+                <div>Dashboard</div>
+              </NavLink>
+            </li>
+            <li className="sidenav__menu-list">
+              <NavLink
+                className="sidenav__menu-list--white"
+                to="/record"
+                // onClick={() => window.location.reload()}
+              >
                 <div>
-                  <span className="icon">
-                    <i className="fas fa-book fa-2x" />
-                  </span>
+                  <div>
+                    <span className="icon">
+                      <i className="fas fa-book fa-2x" />
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div>Records</div>
-            </NavLink>
-          </li>
-          <li className="sidenav__menu-list">
-            <NavLink className="sidenav__menu-list--white" to="/count">
-              <div>
+                <div>Records</div>
+              </NavLink>
+            </li>
+            <li className="sidenav__menu-list">
+              <NavLink className="sidenav__menu-list--white" to="/count">
                 <div>
-                  <span className="icon">
-                    <i className="fas fa-feather-alt fa-2x" />
-                  </span>
+                  <div>
+                    <span className="icon">
+                      <i className="fas fa-feather-alt fa-2x" />
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div>Counts</div>
-            </NavLink>
-          </li>
-        </ul>
-      </aside>
+                <div>Counts</div>
+              </NavLink>
+            </li>
+          </ul>
+        </aside>
+      </div>
     );
   }
   render() {
