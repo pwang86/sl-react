@@ -19,13 +19,9 @@
     top:10px;
     color:#FFF;
 }
-@media all and (max-width: 960px) {
-.btn-mobile-menu {
-    display: block;
- }
 
 .sidenav-wrapper{
-    display:none;
+    display: block;
     background-color: #2a3842;
     width:80px;
     height:100%;
@@ -34,9 +30,6 @@
     text-align: center;
     position:fixed;
     padding-top: 20px;
-}
-.sidenav-wrapper.visible{
-    display: block;
 }
 
 .sidenav__menu{
@@ -56,4 +49,33 @@
 .sidenav__menu-list--white:hover{
     color:#0080cc;
 }
+
+@media all and (max-width: 960px) {
+.btn-mobile-menu {
+    display: block;
+ }
+
+.sidenav-wrapper{
+    display:none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    background-color: #2a3842;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 20px 0;
+}
+.sidenav-wrapper.visible{
+    display: block;
+
+}
+.cover-sidenav{
+    display:block;
+    position: relative;
+    float:left;
+    clear: left;
+    width:100%;
+}
+
 }
