@@ -68,7 +68,7 @@
 }
 .sidenav-wrapper.visible{
     display: block;
-
+    height:15%;
 }
 .cover-sidenav{
     display:block;
@@ -76,6 +76,17 @@
     float:left;
     clear: left;
     width:100%;
+}
+.icon{
+    display: none;
+}
+.sidenav__menu{
+    display: block;
+    width:100%;
+}
+.sidenav__menu li{
+    display: inline-block;
+    width: 15%;
 }
 
 }
