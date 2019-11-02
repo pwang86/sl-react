@@ -2,6 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./SideNav.scss";
 import classNames from "classnames";
+import { redirect } from "./helper";
+import axios from "axios";
 
 class SideNav extends React.PureComponent {
   constructor(props) {
@@ -32,6 +34,12 @@ class SideNav extends React.PureComponent {
       "sidenav-wrapper": true,
       visible: this.state.isClicked
     });
+
+    function handleLogout() {
+      axios.defaults.headers.common.Authorization = null;
+      localStorage.clear();
+      redirect("/login");
+    }
 
     return (
       <div className={sideNavWrapperClass}>
@@ -75,6 +83,22 @@ class SideNav extends React.PureComponent {
                   </div>
                 </div>
                 <div>Counts</div>
+              </NavLink>
+            </li>
+            <li className="sidenav__menu-list">
+              <NavLink
+                className="sidenav__menu-list--white"
+                to="/"
+                onClick={handleLogout}
+              >
+                <div>
+                  <div>
+                    <span className="icon">
+                      <i className="fas fa-sign-out-alt fa-2x" />
+                    </span>
+                  </div>
+                  <div>Logout</div>
+                </div>
               </NavLink>
             </li>
           </ul>
