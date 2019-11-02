@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.scss";
-import { redirect } from "./helper";
-import axios from "axios";
+/* import { redirect } from "./helper";
+import axios from "axios"; */
 
-function handleLogout() {
+/* function handleLogout() {
   axios.defaults.headers.common.Authorization = null;
   localStorage.clear();
   redirect("/login");
-}
+} */
 
 function NavBar() {
   return (
@@ -18,13 +18,14 @@ function NavBar() {
           Stock Location System
         </Link>
       </div>
-      <div className="navbar-menu">
+
+      {/*       <div className="navbar-menu">
         <div className="navbar-end">
           <a className="navbar-item" onClick={handleLogout}>
             Logout
           </a>
         </div>
-      </div>
+      </div> */}
     </nav>
   );
 }
