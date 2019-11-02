@@ -7,3 +7,8 @@
     font-size: 2.0rem;
     margin-left: 80px;   
 }
+@media all and (max-width: 960px) {
+    .navbar__container{
+        display: none;
+    }
+}
