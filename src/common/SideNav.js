@@ -45,7 +45,7 @@ class SideNav extends React.PureComponent {
       <div className={sideNavWrapperClass}>
         <aside className="cover-sidenav">
           <ul className="sidenav__menu">
-            <li className="sidenav__menu-list">
+            <li className="sidenav__menu-list dash-margin">
               <NavLink className="sidenav__menu-list--white" to="/dashboard">
                 <div>
                   <div>
