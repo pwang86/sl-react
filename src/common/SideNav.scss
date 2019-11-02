@@ -68,7 +68,7 @@
 }
 .sidenav-wrapper.visible{
     display: block;
-    height:80px;
+    height:70px;
 }
 .cover-sidenav{
     display:block;
@@ -83,10 +83,19 @@
 }
 .sidenav__menu li{
     display: inline-block;
-    width: 15%;
+    width: 15%; 
 }
 .sidenav__menu span{
     display: none;
 }
 
+.dash-margin{
+    margin-right: 14px;
+}
+.sidenav__menu-list--white{
+    color:$white;
+}
+.sidenav__menu-list--white:hover{
+    color:#0080cc;
+}
 }
