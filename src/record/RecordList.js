@@ -253,29 +253,31 @@ class RecordList extends React.PureComponent {
     return (
       <MainContent>
         <h1 className="title sl-record__title has-text-grey">Records</h1>
-        <Link
-          className="button is-link newRecord_button"
-          to="/record/createrecord"
-        >
-          New Record
-        </Link>
-
-        <div className="field has-addons is-pulled-right clearfix">
-          <div className="control">
-            <TextField
-              name="searchValue"
-              placeholder="Find a Model"
-              value={this.state.searchValue}
-              onChange={this.handleFieldChange}
-            />
+        <div className="new-and-search clearfix">
+          <div className="to-left">
+            <Link
+              className="button is-link newRecord_button"
+              to="/record/createrecord"
+            >
+              New Record
+            </Link>
           </div>
-          <div className="control">
-            <Button buttonType="link" onClick={this.handleClick}>
-              Search
-            </Button>
+          <div className="field has-addons to-right">
+            <div className="control">
+              <TextField
+                name="searchValue"
+                placeholder="Find a Model"
+                value={this.state.searchValue}
+                onChange={this.handleFieldChange}
+              />
+            </div>
+            <div className="control">
+              <Button buttonType="link" onClick={this.handleClick}>
+                Search
+              </Button>
+            </div>
           </div>
         </div>
-
         {this.state.isLoading && <PageLoader />}
         {!this.state.isLoading && this.renderRecords()}
       </MainContent>
