@@ -118,7 +118,7 @@ class RecordList extends React.PureComponent {
     }
     if (!this.state.isPageLoading && this.state.records.length) {
       return (
-        <div>
+        <div className="table-scrollable">
           <table className="table is-fullwidth">
             <thead>
               <tr>
