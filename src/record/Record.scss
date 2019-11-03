@@ -19,12 +19,29 @@
     content: "";
     clear: both;
     display: table;
-  }
+}
+.to-left{
+    float: left;
+}
+.to-right{
+    float:right;
+}
 
   @media all and (max-width:960px){
+
  .table-scrollable{
      overflow:auto;
      overflow-y: hidden;
      max-width: 100%;
  }
+}
+@media all and (max-width: 340px){
+    .to-left{
+        display: inline-block;
+        width: 30%;
+    }
+    .to-right{
+        display: inline-block;
+        width: 45%;
+    }
 }
