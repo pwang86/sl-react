@@ -1,5 +1,5 @@
 .sl-record__title{
-    margin-top: 50px;
+    margin-top: 60px;
     text-align: center;
 }
 
@@ -35,13 +35,11 @@
      max-width: 100%;
  }
 }
-@media all and (max-width: 340px){
-    .to-left{
-        display: inline-block;
-        width: 30%;
-    }
-    .to-right{
-        display: inline-block;
-        width: 45%;
-    }
+@media all and (max-width: 375px){
+.button{
+    font-size: 0.8rem;
+}
+.input{
+    font-size: 0.8rem;
+}
 }
