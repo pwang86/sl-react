@@ -2,14 +2,15 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./SideNav.scss";
 import classNames from "classnames";
-import { redirect } from "./helper";
 import axios from "axios";
 
 class SideNav extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      isClicked: false
+      isClicked: false,
+      isLogout:false,
+      logoutError:""
     };
   }
 
@@ -18,6 +19,21 @@ class SideNav extends React.PureComponent {
       isClicked: !state.isClicked
     }));
   };
+
+  handleLogout = () => {
+    try {
+      axios.defaults.headers.common.Authorization = null;
+      localStorage.clear();
+      this.setState({isLogout:true});
+      // redirect("/login");     
+    } catch(err){
+      this.setState({
+        logoutError:
+          err.err_description || "Sorry, error occured when logging out", 
+        isLogout:false
+      });
+    }
+  }
 
   renderMobileFirst() {
     return (
@@ -35,11 +51,7 @@ class SideNav extends React.PureComponent {
       visible: this.state.isClicked
     });
 
-    function handleLogout() {
-      axios.defaults.headers.common.Authorization = null;
-      localStorage.clear();
-      redirect("/login");
-    }
+ 
 
     return (
       <div className={sideNavWrapperClass}>
@@ -88,8 +100,8 @@ class SideNav extends React.PureComponent {
             <li className="sidenav__menu-list">
               <NavLink
                 className="sidenav__menu-list--white"
-                to="/"
-                onClick={handleLogout}
+                to="/logout"
+                onClick={this.handleLogout}
               >
                 <div>
                   <div>
