@@ -12,6 +12,7 @@ import NotFound from "../error/NotFound";
 import Login from "../login/Login";
 import PrivateRoute from "./PrivateRoute";
 import CountResultList from "../count/CountResultList";
+import Logout from "../common/Logout";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
         />
         <PrivateRoute exact path="/count" component={CountResultList} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/logout" component={Logout} />
         <Route path="*" component={NotFound} />
       </Switch>
     </Router>
