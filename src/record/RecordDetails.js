@@ -297,7 +297,7 @@ class RecordDetails extends React.PureComponent {
     return (
       <MainContent>
         {this.state.isLoading && <PageLoader />}
-        <h1 className="title">
+        <h1 className="title sl-record__title">
           {this.isCreatingNewRecord() ? "New Record" : "Record Details"}
         </h1>
         {this.state.showSuccessUpdated && (
