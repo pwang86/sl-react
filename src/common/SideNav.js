@@ -9,8 +9,8 @@ class SideNav extends React.PureComponent {
     super(props);
     this.state = {
       isClicked: false,
-      isLogout:false,
-      logoutError:""
+      isLogout: false,
+      logoutError: ""
     };
   }
 
@@ -24,16 +24,16 @@ class SideNav extends React.PureComponent {
     try {
       axios.defaults.headers.common.Authorization = null;
       localStorage.clear();
-      this.setState({isLogout:true});
-      // redirect("/login");     
-    } catch(err){
+      this.setState({ isLogout: true });
+      // redirect("/login");
+    } catch (err) {
       this.setState({
         logoutError:
-          err.err_description || "Sorry, error occured when logging out", 
-        isLogout:false
+          err.err_description || "Sorry, error occured when logging out",
+        isLogout: false
       });
     }
-  }
+  };
 
   renderMobileFirst() {
     return (
@@ -50,8 +50,6 @@ class SideNav extends React.PureComponent {
       "sidenav-wrapper": true,
       visible: this.state.isClicked
     });
-
- 
 
     return (
       <div className={sideNavWrapperClass}>
