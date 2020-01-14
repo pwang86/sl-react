@@ -12,20 +12,22 @@ function Dashboard() {
       </h1>
       <div className="tile is-ancestor">
         <div className="tile is-6 is-parent">
-          <div className="tile is-child box notification is-success">
+          <div className="tile is-child box notification is-info">
             <p className="title">Stock Location</p>
             <div className="content">All locations in the warehouse</div>
             <Link
               to="/record"
-              className="button is-success is-outlined is-inverted dashboard-btn"
+              className="button is-info is-outlined is-inverted dashboard-btn"
             >
-              <svg><rect className="svg-rect" x="0" y="0" /></svg>
+              <svg>
+                <rect className="svg-rect" x="0" y="0" />
+              </svg>
               All locations
             </Link>
           </div>
         </div>
         <div className="tile is-parent">
-          <div className="tile is-child box notification is-info">
+          <div className="tile is-child box notification is-success">
             <p className="title">Stock Taking</p>
             <div className="content">One click to get all results</div>
           </div>
@@ -36,4 +38,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
