@@ -17,8 +17,9 @@ function Dashboard() {
             <div className="content">All locations in the warehouse</div>
             <Link
               to="/record"
-              className="button is-success is-outlined is-inverted"
+              className="button is-success is-outlined is-inverted dashboard-btn"
             >
+              <svg><rect className="svg-rect" x="0" y="0" /></svg>
               All locations
             </Link>
           </div>
@@ -36,10 +37,3 @@ function Dashboard() {
 
 export default Dashboard;
 
-/*
-className='btn btn-project'
-              >
-                <svg>
-                  <rect x='0' y='0' fill='none' width='100%' height='100%' />
-                </svg>
-*/
