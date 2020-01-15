@@ -17,7 +17,7 @@ function Dashboard() {
             <div className="content">All locations in the warehouse</div>
             <Link
               to="/record"
-              className="button is-info is-outlined is-inverted dashboard-btn"
+              className="button is-info dashboard-btn"
             >
               <svg>
                 <rect className="svg-rect" x="0" y="0" />
