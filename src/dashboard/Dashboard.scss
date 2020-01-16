@@ -33,6 +33,7 @@
 .dashboard-btn:hover .svg-rect{
   stroke-width: 3;
   stroke-dasharray: 15, 310;
+  /*when dashoffset is 30, line will go anti-clockwise*/
   stroke-dashoffset: -300;
   transition: all 1.35s cubic-bezier(0, 0, 0.5, 1);; 
 } 
