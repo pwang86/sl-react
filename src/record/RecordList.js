@@ -6,9 +6,9 @@ import classnames from "classnames";
 import MainContent from "../common/MainContent";
 import * as RecordApi from "./RecordApi";
 import { Link } from "react-router-dom";
-import Button from "../common/Button";
 import TextField from "../common/TextField";
 import "./Record.scss";
+import Notification from "../common/Notification";
 
 class RecordList extends React.PureComponent {
   constructor(props) {
@@ -21,6 +21,7 @@ class RecordList extends React.PureComponent {
       records: [],
       error: "",
       searchValue: "",
+      searchError: "",
     };
   }
 
@@ -29,18 +30,19 @@ class RecordList extends React.PureComponent {
   }
 
   async componentWillReceiveProps() {
-    if (this.state.searchValue === "") {
-    } else {
-      await this.fetchRecordByPage(1);
-      // Set searchValue to empty so that when
-      // click Records on the SideBar, the pages of records works corretly.
-      this.setState({ searchValue: "" });
-    }
+    await this.fetchRecordByPage(1);
+    // Set searchValue to empty so that when
+    // click Records on the SideBar, the pages of records works corretly.
+    this.setState({ searchValue: "" });
   }
 
-  handleClick = async (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    await this.fetchSearchResultByPage(1);
+    if (this.state.searchValue === "") {
+      this.setState({ searchError: "Please enter something" });
+    } else {
+      await this.fetchSearchResultByPage(1);
+    }
   };
 
   handleFieldChange = (e) => {
@@ -68,6 +70,7 @@ class RecordList extends React.PureComponent {
         isPageLoading: false,
         isLoading: false,
         error: "",
+        searchError: "",
       });
     } catch (e) {
       this.setState({
@@ -88,6 +91,7 @@ class RecordList extends React.PureComponent {
         isPageLoading: false,
         isLoading: false,
         error: "",
+        searchError: "",
       });
     } catch (e) {
       this.setState({
@@ -263,7 +267,10 @@ class RecordList extends React.PureComponent {
               New Record
             </Link>
           </div>
-          <div className="field has-addons to-right">
+          <form
+            onSubmit={this.handleSubmit}
+            className="field has-addons to-right"
+          >
             <div className="control">
               <TextField
                 name="searchValue"
@@ -273,12 +280,15 @@ class RecordList extends React.PureComponent {
               />
             </div>
             <div className="control">
-              <Button buttonType="link" onClick={this.handleClick}>
-                Search
-              </Button>
+              <input type="submit" value="Search" className="button is-link" />
             </div>
-          </div>
+          </form>
         </div>
+        {this.state.searchError && (
+          <Notification type="warning" closable>
+            {this.state.searchError}
+          </Notification>
+        )}
         {this.state.isLoading && <PageLoader />}
         {!this.state.isLoading && this.renderRecords()}
       </MainContent>
