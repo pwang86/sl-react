@@ -20,7 +20,7 @@ class RecordList extends React.PureComponent {
       isLoading: true,
       records: [],
       error: "",
-      searchValue: ""
+      searchValue: "",
     };
   }
 
@@ -29,7 +29,8 @@ class RecordList extends React.PureComponent {
   }
 
   async componentWillReceiveProps() {
-    if (this.state.searchValue !== "") {
+    if (this.state.searchValue === "") {
+    } else {
       await this.fetchRecordByPage(1);
       // Set searchValue to empty so that when
       // click Records on the SideBar, the pages of records works corretly.
@@ -37,24 +38,24 @@ class RecordList extends React.PureComponent {
     }
   }
 
-  handleClick = async e => {
+  handleClick = async (e) => {
     e.preventDefault();
     await this.fetchSearchResultByPage(1);
   };
 
-  handleFieldChange = e => {
+  handleFieldChange = (e) => {
     const {
       target,
-      target: { name }
+      target: { name },
     } = e;
     const value = target.type === "checkbox" ? target.checked : target.value;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
-  fetchSearchResultByPage = async pageNumber => {
+  fetchSearchResultByPage = async (pageNumber) => {
     this.setState({ currentPage: pageNumber, isLoading: true });
     try {
       const data = await RecordApi.searchRecords(
@@ -66,18 +67,18 @@ class RecordList extends React.PureComponent {
         totalPage: data.totalPage,
         isPageLoading: false,
         isLoading: false,
-        error: ""
+        error: "",
       });
     } catch (e) {
       this.setState({
         error: "Sorry, error occurred while loading records",
         isLoading: false,
-        isPageLoading: false
+        isPageLoading: false,
       });
     }
   };
 
-  fetchRecordByPage = async pageNumber => {
+  fetchRecordByPage = async (pageNumber) => {
     this.setState({ currentPage: pageNumber, isLoading: true });
     try {
       const data = await RecordApi.getRecords(pageNumber);
@@ -86,13 +87,13 @@ class RecordList extends React.PureComponent {
         totalPage: data.totalPage,
         isPageLoading: false,
         isLoading: false,
-        error: ""
+        error: "",
       });
     } catch (e) {
       this.setState({
         error: "Sorry, error occurred while loading records",
         isLoading: false,
-        isPageLoading: false
+        isPageLoading: false,
       });
     }
   };
@@ -105,7 +106,7 @@ class RecordList extends React.PureComponent {
       isPageLoading: false,
       records: data.records,
       currentPage: pageNumber,
-      totalPage: data.totalPage
+      totalPage: data.totalPage,
     });
   }
 
@@ -133,7 +134,7 @@ class RecordList extends React.PureComponent {
               </tr>
             </thead>
             <tbody>
-              {this.state.records.map(record => (
+              {this.state.records.map((record) => (
                 <tr key={record.id}>
                   <td>{record.model}</td>
                   <td>{record.location}</td>
@@ -175,7 +176,7 @@ class RecordList extends React.PureComponent {
           totalPage - 3,
           totalPage - 2,
           totalPage - 1,
-          totalPage
+          totalPage,
         ];
       }
       // new added
@@ -185,7 +186,7 @@ class RecordList extends React.PureComponent {
           currentPage - 2,
           currentPage - 1,
           currentPage,
-          currentPage + 1
+          currentPage + 1,
         ];
       } else {
         // [currentPage - 1, currentPage, currentPage + 1]
@@ -194,7 +195,7 @@ class RecordList extends React.PureComponent {
           currentPage - 1,
           currentPage,
           currentPage + 1,
-          currentPage + 2
+          currentPage + 2,
         ];
       }
     }
@@ -226,11 +227,11 @@ class RecordList extends React.PureComponent {
         )}
         <ul className="pagination-list">
           {" "}
-          {pageNumbers.map(pageNumber => (
+          {pageNumbers.map((pageNumber) => (
             <a
               key={pageNumber}
               className={classnames("pagination-link", {
-                "is-current": currentPage === pageNumber
+                "is-current": currentPage === pageNumber,
               })}
               onClick={
                 currentPage === pageNumber
