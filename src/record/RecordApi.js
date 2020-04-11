@@ -5,7 +5,7 @@ export function getRecords(pageNumber = 1) {
   return new Promise((resolve, reject) => {
     axios
       .get(`/api/record?pageNumber=${pageNumber}`)
-      .then(response => {
+      .then((response) => {
         if (response.status >= 200 && response.status < 300) {
           resolve(response.data);
         } else {
@@ -21,9 +21,9 @@ export function searchRecords(searchValue, pageNumber = 1) {
   return new Promise((resolve, reject) => {
     axios
       .get(
-        `/api/searchrecord?pageNumber=${pageNumber}&searchValue=${searchValue}`
+        `/api/record/search?pageNumber=${pageNumber}&searchValue=${searchValue}`
       )
-      .then(response => {
+      .then((response) => {
         if (response.status >= 200 && response.status < 300) {
           resolve(response.data);
         } else {
@@ -38,7 +38,7 @@ export function getRecordById(id) {
   return new Promise((resolve, reject) => {
     axios
       .get(`/api/record/${id}`)
-      .then(response => {
+      .then((response) => {
         if (response.status >= 200 && response.status < 300) {
           resolve(response.data);
         } else {
@@ -53,7 +53,7 @@ export function createRecord(record) {
   return new Promise((resolve, reject) => {
     axios
       .post("/api/record/createrecord", record)
-      .then(response => {
+      .then((response) => {
         if (response.status >= 200 && response.status < 300) {
           resolve(response.data);
         } else {
@@ -72,12 +72,12 @@ export function updateRecord(id, record) {
     "date",
     "isTPG",
     "isNZ",
-    "quantity"
+    "quantity",
   ]);
   return new Promise((resolve, reject) => {
     axios
       .put(`/api/record/${id}`, data)
-      .then(response => {
+      .then((response) => {
         if (response.status >= 200 && response.status < 300) {
           resolve(response.data);
         } else {
@@ -92,7 +92,7 @@ export function deleteRecord(id) {
   return new Promise((resolve, reject) => {
     axios
       .delete(`/api/record/${id}`)
-      .then(response => {
+      .then((response) => {
         if (response.status >= 200 && response.status < 300) {
           resolve(response.data);
         } else {
