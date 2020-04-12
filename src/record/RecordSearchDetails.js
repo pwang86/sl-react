@@ -65,8 +65,10 @@ class RecordSearchDetails extends React.PureComponent {
     try {
       await RecordApi.deleteRecord(this.getRecordId());
       this.setState({ showDeleteModal: false });
-      // redirect("/record");
-      this.props.history.push("/");
+
+      // In app.js, "/" goes to login
+      // this.props.history.push("/");
+      this.props.history.goBack();
     } catch (err) {
       this.setState({
         error: "error occured while deleting",
