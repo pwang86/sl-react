@@ -6,8 +6,9 @@ import {
   Redirect,
 } from "react-router-dom";
 import RecordList from "../record/RecordList";
-import RecordSearchList from "../record/RecordSearchList";
 import RecordDetails from "../record/RecordDetails";
+import RecordSearchList from "../record/RecordSearchList";
+import RecordSearchDetails from "../record/RecordSearchDetails";
 import Dashboard from "../dashboard/Dashboard";
 import NotFound from "../error/NotFound";
 import Login from "../login/Login";
@@ -23,13 +24,17 @@ export default function App() {
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/record" component={RecordList} />
         <PrivateRoute
+          path="/record/:id(\d+|createrecord)"
+          component={RecordDetails}
+        />
+        <PrivateRoute
           exact
           path="/search/:searchValue"
           component={RecordSearchList}
         />
         <PrivateRoute
-          path="/record/:id(\d+|createrecord)"
-          component={RecordDetails}
+          path="/search/:searchValue/:id"
+          component={RecordSearchDetails}
         />
         <PrivateRoute exact path="/count" component={CountResultList} />
         <Route exact path="/login" component={Login} />

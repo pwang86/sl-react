@@ -5,7 +5,7 @@ import { range } from "lodash/util";
 import classnames from "classnames";
 import MainContent from "../common/MainContent";
 import * as RecordApi from "./RecordApi";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./Record.scss";
 
 class RecordSearchList extends React.PureComponent {
@@ -32,7 +32,7 @@ class RecordSearchList extends React.PureComponent {
 
     try {
       const data = await RecordApi.searchRecords(
-        this.props.match.params.searchValue,
+        this.props.match.params.searchValue.toLowerCase(),
         pageNumber
       );
       this.setState({
@@ -97,7 +97,9 @@ class RecordSearchList extends React.PureComponent {
                   <td>{String(record.isNZ)}</td>
                   <td>{record.quantity}</td>
                   <td>
-                    <Link to={`/record/${record.id}`}>Details</Link>
+                    <Link to={`/search/${this.state.searchValue}/${record.id}`}>
+                      Details
+                    </Link>
                   </td>
                 </tr>
               ))}
@@ -206,4 +208,4 @@ class RecordSearchList extends React.PureComponent {
   }
 }
 
-export default RecordSearchList;
+export default withRouter(RecordSearchList);

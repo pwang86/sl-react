@@ -6,7 +6,7 @@ class Notification extends React.PureComponent {
   constructor() {
     super();
     this.state = {
-      shown: true
+      shown: true,
     };
   }
 
@@ -37,9 +37,9 @@ Notification.propTypes = {
     "success",
     "warning",
     "danger",
-    "white"
+    "white",
   ]),
-  closable: PropTypes.bool
+  closable: PropTypes.bool,
 };
 
 export default Notification;
