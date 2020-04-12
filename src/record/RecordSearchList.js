@@ -32,7 +32,7 @@ class RecordSearchList extends React.PureComponent {
 
     try {
       const data = await RecordApi.searchRecords(
-        this.props.match.params.searchValue,
+        this.props.match.params.searchValue.toLowerCase(),
         pageNumber
       );
       this.setState({
