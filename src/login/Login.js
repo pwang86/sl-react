@@ -11,14 +11,8 @@ import "./Login.scss";
 import Notification from "../common/Notification";
 
 const schema = yup.object().shape({
-  username: yup
-    .string()
-    .label("Username")
-    .required(),
-  password: yup
-    .string()
-    .label("Password")
-    .required()
+  username: yup.string().label("Username").required(),
+  password: yup.string().label("Password").required(),
 });
 
 class Login extends React.PureComponent {
@@ -29,25 +23,26 @@ class Login extends React.PureComponent {
       password: "",
       isLogin: false,
       validationErrors: {},
-      loginError: ""
+      loginError: "",
     };
   }
 
-  handleFieldChange = e => {
+  handleFieldChange = (e) => {
     const { name, value } = e.target;
     this.setState({
       [name]: value,
-      validationErrors: {}
+      validationErrors: {},
+      loginError: "",
     });
   };
 
-  handleSubmit = async e => {
+  handleSubmit = async (e) => {
     e.preventDefault();
 
     const userInput = pick(this.state, ["username", "password"]);
     try {
       await schema.validate(userInput, {
-        abortEarly: false
+        abortEarly: false,
       });
     } catch (err) {
       const validationErrors = getValidationErrors(err);
@@ -64,16 +59,14 @@ class Login extends React.PureComponent {
       this.setState({ loginError: "", isLogin: false });
 
       // Update bearer token
-      axios.defaults.headers.common.Authorization = `Bearer ${
-        response.access_token
-      }`;
+      axios.defaults.headers.common.Authorization = `Bearer ${response.access_token}`;
       localStorage.setItem("access_token", response.access_token);
       redirect("/dashboard");
     } catch (err) {
       this.setState({
         loginError:
           err.error_description || "Sorry, error occured when logging in",
-        isLogin: false
+        isLogin: false,
       });
     }
   };
@@ -94,7 +87,7 @@ class Login extends React.PureComponent {
               </nav>
 
               {this.state.loginError && (
-                <Notification type="danger" closable>
+                <Notification type="danger">
                   {this.state.loginError}
                 </Notification>
               )}
@@ -168,3 +161,12 @@ class Login extends React.PureComponent {
 }
 
 export default Login;
+
+/* remove closable so that every time when error appears,
+notification appears.             
+{this.state.loginError && (
+    <Notification type="danger" closable>
+      {this.state.loginError}
+    </Notification>
+)}
+*/
