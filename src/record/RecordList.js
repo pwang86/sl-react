@@ -23,7 +23,6 @@ class RecordList extends React.PureComponent {
       error: "",
       searchValue: "",
       searchError: "",
-      showWarningNotification: false,
     };
   }
 
@@ -43,7 +42,6 @@ class RecordList extends React.PureComponent {
     if (this.state.searchValue === "") {
       this.setState({
         searchError: "Please enter something",
-        showWarningNotification: true,
       });
     } else {
       redirect(`search/${this.state.searchValue}`);
@@ -59,7 +57,7 @@ class RecordList extends React.PureComponent {
 
     this.setState({
       [name]: value,
-      showWarningNotification: false,
+      searchError: "",
     });
   };
 
@@ -261,7 +259,7 @@ class RecordList extends React.PureComponent {
             </div>
           </form>
         </div>
-        {this.state.showWarningNotification && (
+        {this.state.searchError && (
           <Notification type="warning">{this.state.searchError}</Notification>
         )}
         {this.state.isLoading && <PageLoader />}
