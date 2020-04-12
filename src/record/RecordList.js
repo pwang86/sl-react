@@ -23,6 +23,7 @@ class RecordList extends React.PureComponent {
       error: "",
       searchValue: "",
       searchError: "",
+      showWarningNotification: false,
     };
   }
 
@@ -30,10 +31,20 @@ class RecordList extends React.PureComponent {
     await this.fetchRecordByPage(1);
   }
 
+  async componentWillReceiveProps() {
+    await this.fetchRecordByPage(1);
+    // Set searchValue to empty so that when
+    // click Records on the SideBar, the pages of records works corretly.
+    this.setState({ searchValue: "" });
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     if (this.state.searchValue === "") {
-      this.setState({ searchError: "Please enter something" });
+      this.setState({
+        searchError: "Please enter something",
+        showWarningNotification: true,
+      });
     } else {
       redirect(`search/${this.state.searchValue}`);
     }
@@ -48,6 +59,7 @@ class RecordList extends React.PureComponent {
 
     this.setState({
       [name]: value,
+      showWarningNotification: false,
     });
   };
 
@@ -68,6 +80,7 @@ class RecordList extends React.PureComponent {
         error: "Sorry, error occurred while loading records",
         isLoading: false,
         isPageLoading: false,
+        searchError: "",
       });
     }
   };
@@ -248,10 +261,8 @@ class RecordList extends React.PureComponent {
             </div>
           </form>
         </div>
-        {this.state.searchError && (
-          <Notification type="warning" closable>
-            {this.state.searchError}
-          </Notification>
+        {this.state.showWarningNotification && (
+          <Notification type="warning">{this.state.searchError}</Notification>
         )}
         {this.state.isLoading && <PageLoader />}
         {!this.state.isLoading && this.renderRecords()}
