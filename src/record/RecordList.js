@@ -45,6 +45,7 @@ class RecordList extends React.PureComponent {
       });
     } else {
       redirect(`search/${this.state.searchValue}`);
+      // redirect(`search?q=${this.state.searchValue}`);
     }
   };
 
