@@ -24,6 +24,7 @@ class RecordSearchList extends React.PureComponent {
 
   async componentDidMount() {
     this.setState({ searchValue: this.props.match.params.searchValue });
+    // this.setState({ searchValue: this.props.location.search});
     await this.fetchSearchResultByPage(1);
   }
 
