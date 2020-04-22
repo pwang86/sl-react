@@ -45,3 +45,4 @@ export default function App() {
   );
 }
 /* must contain ":" in search/:searchValue, otherwise it goes to not found */
+// path="/search"
