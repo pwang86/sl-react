@@ -27,13 +27,9 @@ export default function App() {
           path="/record/:id(\d+|createrecord)"
           component={RecordDetails}
         />
+        <PrivateRoute exact path="/search" component={RecordSearchList} />
         <PrivateRoute
-          exact
-          path="/search/:searchValue"
-          component={RecordSearchList}
-        />
-        <PrivateRoute
-          path="/search/:searchValue/:id"
+          path="/search?q=:searchValue/:id"
           component={RecordSearchDetails}
         />
         <PrivateRoute exact path="/count" component={CountResultList} />
@@ -45,4 +41,4 @@ export default function App() {
   );
 }
 /* must contain ":" in search/:searchValue, otherwise it goes to not found */
-// path="/search"
+// "/search/:searchValue", "/search/:searchValue/:id"
