@@ -44,8 +44,8 @@ class RecordList extends React.PureComponent {
         searchError: "Please enter something",
       });
     } else {
-      redirect(`search/${this.state.searchValue}`);
-      // redirect(`search?q=${this.state.searchValue}`);
+      // redirect(`search/${this.state.searchValue}`);
+      redirect(`search?q=${this.state.searchValue}`);
     }
   };
 
