@@ -6,6 +6,7 @@ import classnames from "classnames";
 import MainContent from "../common/MainContent";
 import * as RecordApi from "./RecordApi";
 import { Link, withRouter } from "react-router-dom";
+import * as QueryString from "query-string";
 import "./Record.scss";
 
 class RecordSearchList extends React.PureComponent {
@@ -21,19 +22,22 @@ class RecordSearchList extends React.PureComponent {
       searchValue: "",
     };
   }
-
+  // <Link to={`/search/${record.id}`}>Details</Link>
   async componentDidMount() {
-    this.setState({ searchValue: this.props.match.params.searchValue });
-    // this.setState({ searchValue: this.props.location.search});
+    // this.setState({ searchValue: this.props.match.params.searchValue });
+    const params = QueryString.parse(this.props.location.search);
+    this.setState({ searchValue: params.q });
     await this.fetchSearchResultByPage(1);
   }
 
   fetchSearchResultByPage = async (pageNumber) => {
     this.setState({ currentPage: pageNumber, isLoading: true });
 
+    // this.props.match.params.searchValue.toLowerCase()
     try {
+      const params = QueryString.parse(this.props.location.search);
       const data = await RecordApi.searchRecords(
-        this.props.match.params.searchValue.toLowerCase(),
+        params.q.toLowerCase(),
         pageNumber
       );
       this.setState({
@@ -98,7 +102,11 @@ class RecordSearchList extends React.PureComponent {
                   <td>{String(record.isNZ)}</td>
                   <td>{record.quantity}</td>
                   <td>
-                    <Link to={`/search/${this.state.searchValue}/${record.id}`}>
+                    <Link
+                      to={{
+                        pathname: `/search?q=${this.state.searchValue}/${record.id}`,
+                      }}
+                    >
                       Details
                     </Link>
                   </td>
