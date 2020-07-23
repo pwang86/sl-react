@@ -250,7 +250,7 @@ class RecordList extends React.PureComponent {
             <div className="control">
               <TextField
                 name="searchValue"
-                placeholder="Find a Model"
+                placeholder="Search Model/Location"
                 value={this.state.searchValue}
                 onChange={this.handleFieldChange}
               />
