@@ -55,7 +55,11 @@ export function createRecord(record) {
       .post("/api/record/createrecord", record)
       .then((response) => {
         if (response.status >= 200 && response.status < 300) {
-          resolve(response.data);
+          if (response.status === 201) {
+            reject(response.data);
+          } else {
+            resolve(response.data);
+          }
         } else {
           reject(response.response);
         }
