@@ -172,7 +172,7 @@ class RecordDetails extends React.PureComponent {
             <TextField
               name="model"
               placeholder="Model"
-              value={this.state.record.model}
+              value={this.state.record.model.toUpperCase()}
               onChange={this.handleFieldChange}
               error={this.state.validationErrors["model"]}
             />
@@ -182,7 +182,7 @@ class RecordDetails extends React.PureComponent {
             <TextField
               name="location"
               placeholder="Location"
-              value={this.state.record.location}
+              value={this.state.record.location.toUpperCase()}
               onChange={this.handleFieldChange}
               error={this.state.validationErrors["location"]}
             />
