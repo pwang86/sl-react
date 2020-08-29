@@ -98,6 +98,7 @@ class RecordDetails extends React.PureComponent {
         [name]: value,
       },
       validationErrors: {},
+      error: "",
     });
   };
 
@@ -157,7 +158,8 @@ class RecordDetails extends React.PureComponent {
         this.setState({ showSuccessUpdated: true });
       }
     } catch (e) {
-      this.setState({ isSaving: false, error: e.message });
+      console.log(e.data);
+      this.setState({ isSaving: false, error: e.data });
     }
   };
 
@@ -277,6 +279,9 @@ class RecordDetails extends React.PureComponent {
         <h1 className="title">
           {this.isCreatingNewRecord() ? "New Record" : "Record Details"}
         </h1>
+        {this.state.error && (
+          <Notification type="danger">{this.state.error}</Notification>
+        )}
         {this.state.showSuccessUpdated && (
           <Notification type="success">Successfully saved record</Notification>
         )}
