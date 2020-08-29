@@ -56,7 +56,8 @@ export function createRecord(record) {
       .then((response) => {
         if (response.status >= 200 && response.status < 300) {
           if (response.status === 201) {
-            reject(response.data);
+            // console.log(response.data);
+            reject(response);
           } else {
             resolve(response.data);
           }
