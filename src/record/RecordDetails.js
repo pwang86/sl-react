@@ -13,36 +13,13 @@ import Notification from "../common/Notification";
 import "./Record.scss";
 
 const schema = yup.object().shape({
-  model: yup
-    .string()
-    .label("Model")
-    .required(),
-  location: yup
-    .string()
-    .label("Location")
-    .required(),
-  version: yup
-    .number()
-    .positive()
-    .label("Version")
-    .required(),
-  date: yup
-    .string()
-    .label("Date of creation")
-    .required(),
-  isTPG: yup
-    .boolean()
-    .label("IsTPG")
-    .required(),
-  isNZ: yup
-    .boolean()
-    .label("IsNZ")
-    .required(),
-  quantity: yup
-    .number()
-    .positive()
-    .label("Quantity")
-    .required()
+  model: yup.string().label("Model").required(),
+  location: yup.string().label("Location").required(),
+  version: yup.number().positive().label("Version").required(),
+  date: yup.string().label("Date of creation").required(),
+  isTPG: yup.boolean().label("IsTPG").required(),
+  isNZ: yup.boolean().label("IsNZ").required(),
+  quantity: yup.number().positive().label("Quantity").required(),
 });
 
 class RecordDetails extends React.PureComponent {
@@ -56,14 +33,14 @@ class RecordDetails extends React.PureComponent {
         date: "",
         isTPG: false,
         isNZ: false,
-        quantity: ""
+        quantity: "",
       },
       isLoading: false,
       error: "",
       validationErrors: {},
       showDeleteModal: false,
       showSuccessUpdated: false,
-      isSaving: false
+      isSaving: false,
     };
   }
 
@@ -99,7 +76,7 @@ class RecordDetails extends React.PureComponent {
     } catch (err) {
       this.setState({
         error: "error occured while deleting",
-        showDeleteModal: false
+        showDeleteModal: false,
       });
     }
   };
@@ -108,23 +85,23 @@ class RecordDetails extends React.PureComponent {
     this.setState({ showSuccessUpdated: false });
   };
 
-  handleFieldChange = e => {
+  handleFieldChange = (e) => {
     const {
       target,
-      target: { name }
+      target: { name },
     } = e;
     const value = target.type === "checkbox" ? target.checked : target.value;
 
     this.setState({
       record: {
         ...this.state.record,
-        [name]: value
+        [name]: value,
       },
-      validationErrors: {}
+      validationErrors: {},
     });
   };
 
-  handleSubmit = async e => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     const userInput = pick(this.state.record, [
       "model",
@@ -133,11 +110,11 @@ class RecordDetails extends React.PureComponent {
       "date",
       "isTPG",
       "isNZ",
-      "quantity"
+      "quantity",
     ]);
     try {
       await schema.validate(userInput, {
-        abortEarly: false
+        abortEarly: false,
       });
     } catch (err) {
       const validationErrors = getValidationErrors(err);
@@ -180,7 +157,7 @@ class RecordDetails extends React.PureComponent {
         this.setState({ showSuccessUpdated: true });
       }
     } catch (e) {
-      this.setState({ isSaving: false });
+      this.setState({ isSaving: false, error: e.message });
     }
   };
 
@@ -318,7 +295,7 @@ class RecordDetails extends React.PureComponent {
         )}
         <div
           className={classnames("modal", {
-            "is-active": this.state.showDeleteModal
+            "is-active": this.state.showDeleteModal,
           })}
         >
           <div className="modal-background" />
