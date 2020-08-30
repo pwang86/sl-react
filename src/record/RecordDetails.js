@@ -168,7 +168,9 @@ class RecordDetails extends React.PureComponent {
       <div className="box">
         <form onSubmit={this.handleSubmit}>
           <div className="field">
-            <label className="label">Model</label>
+            <label className="label">
+              Model, e.g. VR1600V (FTTN), DECO M5 (2P)
+            </label>
             <TextField
               name="model"
               placeholder="Model"
