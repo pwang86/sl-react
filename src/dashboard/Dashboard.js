@@ -1,6 +1,5 @@
 import React from "react";
 import MainContent from "../common/MainContent";
-import { Link } from "react-router-dom";
 import "./Dashboard.scss";
 
 function Dashboard() {
@@ -29,12 +28,26 @@ function Dashboard() {
           <div className="tile is-child box notification is-danger">
             <p className="title">VR1600V?</p>
             <div className="content">import from excel template</div>
-            <Link to="/record" className="button is-danger dashboard-btn">
-              <svg>
-                <rect className="svg-rect" x="0" y="0" />
-              </svg>
-              All locations
-            </Link>
+            <div className="content file has-name">
+              <label className="file-label">
+                <input className="file-input" type="file" name="excel" />
+                <span className="file-cta">
+                  <span className="file-icon">
+                    <i className="fas fa-upload" />
+                  </span>
+                  <span className="file-label">Choose a file…</span>
+                </span>
+                <span className="file-name">No file chosen</span>
+              </label>
+            </div>
+            <div className="content">
+              <button className="button is-danger dashboard-btn">
+                <svg>
+                  <rect className="svg-rect" x="0" y="0" />
+                </svg>
+                Start process
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -43,3 +56,15 @@ function Dashboard() {
 }
 
 export default Dashboard;
+/*
+<div className="tile is-child box notification is-danger">
+            <p className="title">VR1600V?</p>
+            <div className="content">import from excel template</div>
+            <Link to="/record" className="button is-danger dashboard-btn">
+              <svg>
+                <rect className="svg-rect" x="0" y="0" />
+              </svg>
+              All locations
+            </Link>
+          </div>
+*/
