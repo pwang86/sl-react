@@ -64,7 +64,7 @@ export default Dashboard;
               <svg>
                 <rect className="svg-rect" x="0" y="0" />
               </svg>
-              All locations
+              All locations   //Note: text length matters, if only one world (e.g. Proceed), then button not aligned
             </Link>
           </div>
 */
