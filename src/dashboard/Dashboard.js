@@ -15,21 +15,26 @@ function Dashboard() {
           <div className="tile is-child box notification is-info">
             <p className="title">Stock Location</p>
             <div className="content">All locations in the warehouse</div>
-            <Link
-              to="/record"
-              className="button is-info dashboard-btn"
-            >
-              <svg>
-                <rect className="svg-rect" x="0" y="0" />
-              </svg>
-              All locations
-            </Link>
           </div>
         </div>
         <div className="tile is-parent">
           <div className="tile is-child box notification is-success">
             <p className="title">Stock Taking</p>
             <div className="content">One click to get all results</div>
+          </div>
+        </div>
+      </div>
+      <div className="tile is-ancestor">
+        <div className="tile is-parent">
+          <div className="tile is-child box notification is-danger">
+            <p className="title">VR1600V?</p>
+            <div className="content">import from excel template</div>
+            <Link to="/record" className="button is-danger dashboard-btn">
+              <svg>
+                <rect className="svg-rect" x="0" y="0" />
+              </svg>
+              All locations
+            </Link>
           </div>
         </div>
       </div>
