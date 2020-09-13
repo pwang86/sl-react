@@ -2,6 +2,7 @@ import React from "react";
 import MainContent from "../common/MainContent";
 import "./Dashboard.scss";
 import * as XLSX from "xlsx";
+import Notification from "../common/Notification";
 
 class Dashboard extends React.PureComponent {
   constructor() {
@@ -16,6 +17,8 @@ class Dashboard extends React.PureComponent {
 
   handleImport = (e) => {
     e.preventDefault();
+    this.setState({ error: "" });
+
     let fileImport = e.target.files[0];
     let regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
     if (regex.test(fileImport.name.toLowerCase())) {
@@ -35,9 +38,11 @@ class Dashboard extends React.PureComponent {
           this.setState({ file: fileImport.name });
         }
       } else {
+        this.setState({ error: "This browser does not support HTML5." });
         console.log("This browser does not support HTML5.");
       }
     } else {
+      this.setState({ error: "Please upload a valid Excel file." });
       console.log("Please upload a valid Excel file.");
     }
   };
@@ -45,6 +50,9 @@ class Dashboard extends React.PureComponent {
   render() {
     return (
       <MainContent>
+        {this.state.error && (
+          <Notification type="danger">{this.state.error}</Notification>
+        )}
         <h1 className="title sl-dashboard__title has-text-grey">
           {" "}
           Welcome to Stock Location System
