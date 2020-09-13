@@ -1,17 +1,46 @@
 import React from "react";
 import MainContent from "../common/MainContent";
 import "./Dashboard.scss";
+import * as XLSX from "xlsx";
 
 class Dashboard extends React.PureComponent {
   constructor() {
     super();
     this.state = {
+      file: "No file chosen",
       showSuccess: false,
+      importedData: "",
       error: "",
     };
   }
 
-  handleImport = () => {};
+  handleImport = (e) => {
+    e.preventDefault();
+    let fileImport = e.target.files[0];
+    let regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
+    if (regex.test(fileImport.name.toLowerCase())) {
+      if (typeof FileReader !== "undefined") {
+        const reader = new FileReader();
+        if (reader.readAsBinaryString) {
+          reader.onload = (e) => {
+            const workbook = XLSX.read(reader.result, { type: "binary" });
+            const firstSheet = workbook.SheetNames[0];
+            const excelRows = XLSX.utils.sheet_to_row_object_array(
+              workbook.Sheets[firstSheet]
+            );
+
+            console.log(excelRows);
+          };
+          reader.readAsBinaryString(fileImport);
+          this.setState({ file: fileImport.name });
+        }
+      } else {
+        console.log("This browser does not support HTML5.");
+      }
+    } else {
+      console.log("Please upload a valid Excel file.");
+    }
+  };
 
   render() {
     return (
@@ -44,7 +73,7 @@ class Dashboard extends React.PureComponent {
                   <input
                     className="file-input"
                     type="file"
-                    name="excel"
+                    id="fileImport"
                     onChange={this.handleImport}
                   />
                   <span className="file-cta">
@@ -53,7 +82,7 @@ class Dashboard extends React.PureComponent {
                     </span>
                     <span className="file-label">Choose a file…</span>
                   </span>
-                  <span className="file-name">No file chosen</span>
+                  <span className="file-name">{this.state.file}</span>
                 </label>
               </div>
               <div className="content">
