@@ -3,6 +3,8 @@ import MainContent from "../common/MainContent";
 import "./Dashboard.scss";
 import * as XLSX from "xlsx";
 import Notification from "../common/Notification";
+import { pick } from "lodash/object";
+import * as RecordApi from "../record/RecordApi";
 
 class Dashboard extends React.PureComponent {
   constructor() {
@@ -10,8 +12,17 @@ class Dashboard extends React.PureComponent {
     this.state = {
       file: "No file chosen",
       showSuccess: false,
-      importedData: "",
+      record: {
+        model: "",
+        location: "",
+        version: "",
+        date: "",
+        isTPG: false,
+        isNZ: false,
+        quantity: "",
+      },
       error: "",
+      isProcessing: false,
     };
   }
 
@@ -44,6 +55,27 @@ class Dashboard extends React.PureComponent {
     } else {
       this.setState({ error: "Please upload a valid Excel file." });
       console.log("Please upload a valid Excel file.");
+    }
+  };
+
+  handleProcess = async (e) => {
+    e.preventDefault();
+    this.setState({ error: "" });
+
+    const importedData = pick(this.state.record, [
+      "model",
+      "location",
+      "version",
+      "date",
+      "isTPG",
+      "isNZ",
+      "quantity",
+    ]);
+
+    try {
+      await RecordApi.createRecord(importedData);
+    } catch (e) {
+      this.setState({ error: e.data });
     }
   };
 
@@ -94,7 +126,11 @@ class Dashboard extends React.PureComponent {
                 </label>
               </div>
               <div className="content">
-                <button className="button is-primary dashboard-btn">
+                <button
+                  className="button is-primary dashboard-btn"
+                  is-loading={this.setState.isProcessing}
+                  onClick={this.handleProcess}
+                >
                   <svg>
                     <rect className="svg-rect" x="0" y="0" />
                   </svg>
