@@ -1,28 +1,31 @@
 import React from "react";
+// import * as yup from "yup";
 import MainContent from "../common/MainContent";
 import "./Dashboard.scss";
 import * as XLSX from "xlsx";
 import Notification from "../common/Notification";
-import { pick } from "lodash/object";
 import * as RecordApi from "../record/RecordApi";
-
+// import { getValidationErrors } from "../common/helper";
+/*
+const schema = yup.object().shape({
+  model: yup.string().label("Model").required(),
+  location: yup.string().label("Location").required(),
+  version: yup.number().positive().label("Version").required(),
+  date: yup.string().label("Date of creation").required(),
+  quantity: yup.number().positive().label("Quantity").required(),
+});
+*/
 class Dashboard extends React.PureComponent {
   constructor() {
     super();
     this.state = {
       file: "No file chosen",
-      showSuccess: false,
-      record: {
-        model: "",
-        location: "",
-        version: "",
-        date: "",
-        isTPG: false,
-        isNZ: false,
-        quantity: "",
-      },
+      records: [],
+      validationErrors: {},
       error: "",
       isProcessing: false,
+      isSuccess: false,
+      showSuccess: "",
     };
   }
 
@@ -42,7 +45,7 @@ class Dashboard extends React.PureComponent {
             const excelRows = XLSX.utils.sheet_to_row_object_array(
               workbook.Sheets[firstSheet]
             );
-
+            this.setState({ records: [...excelRows] });
             console.log(excelRows);
           };
           reader.readAsBinaryString(fileImport);
@@ -58,25 +61,35 @@ class Dashboard extends React.PureComponent {
     }
   };
 
-  handleProcess = async (e) => {
+  handleProcess = (e) => {
     e.preventDefault();
-    this.setState({ error: "" });
+    this.setState({ error: "", isProcessing: true });
 
-    const importedData = pick(this.state.record, [
-      "model",
-      "location",
-      "version",
-      "date",
-      "isTPG",
-      "isNZ",
-      "quantity",
-    ]);
-
-    try {
-      await RecordApi.createRecord(importedData);
-    } catch (e) {
-      this.setState({ error: e.data });
-    }
+    this.state.records.forEach(async (record) => {
+      /*
+      try {
+        await schema.validate(record, {
+          abortEarly: false,
+        });
+      } catch (err) {
+        this.setState({ validationErrors: getValidationErrors(err) });
+        return;
+      }
+      */
+      let recordClone = record;
+      recordClone.Date += "T00:00:00";
+      try {
+        this.setState({ validationErrors: {} });
+        await RecordApi.createRecord(recordClone);
+      } catch (e) {
+        this.setState({ error: e.data, isProcessing: false });
+      }
+    });
+    this.setState({
+      isSuccess: true,
+      showSuccess: "Congratulations! Records from excel file have been added.",
+      isProcessing: false,
+    });
   };
 
   render() {
@@ -84,6 +97,9 @@ class Dashboard extends React.PureComponent {
       <MainContent>
         {this.state.error && (
           <Notification type="danger">{this.state.error}</Notification>
+        )}
+        {this.state.isSuccess && (
+          <Notification type="warning">{this.state.showSuccess}</Notification>
         )}
         <h1 className="title sl-dashboard__title has-text-grey">
           {" "}
