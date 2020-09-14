@@ -78,12 +78,10 @@ class Dashboard extends React.PureComponent {
       }
       */
 
-      let recordClone = Object.assign({}, record);
+      let recordClone = Object.assign({ IsNZ: false, IsTPG: false }, record);
       recordClone.Date += "T00:00:00";
       recordClone.Version = parseFloat(recordClone.Version);
       recordClone.Quantity = parseInt(recordClone.Quantity);
-      recordClone.IsTPG = "false";
-      recordClone.IsNZ = "false";
 
       try {
         this.setState({ validationErrors: {} });
