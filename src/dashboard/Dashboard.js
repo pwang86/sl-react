@@ -31,7 +31,7 @@ class Dashboard extends React.PureComponent {
 
   handleImport = (e) => {
     e.preventDefault();
-    this.setState({ error: "" });
+    this.setState({ error: "", isSuccess: false, showSuccess: "" });
 
     let fileImport = e.target.files[0];
     let regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
@@ -64,7 +64,12 @@ class Dashboard extends React.PureComponent {
 
   handleProcess = (e) => {
     e.preventDefault();
-    this.setState({ error: "", isProcessing: true });
+    this.setState({
+      error: "",
+      isProcessing: true,
+      isSuccess: false,
+      showSuccess: "",
+    });
 
     this.state.records.forEach(async (record) => {
       /*
@@ -86,15 +91,19 @@ class Dashboard extends React.PureComponent {
       try {
         this.setState({ validationErrors: {} });
         await RecordApi.createRecord(recordClone);
+        this.setState({ isSuccess: true });
       } catch (e) {
-        this.setState({ error: e.data, isProcessing: false });
+        this.setState({ error: e.data, isProcessing: false, isSuccess: false });
       }
     });
-    this.setState({
-      isSuccess: true,
-      showSuccess: "Congratulations! Records from excel file have been added.",
-      isProcessing: false,
-    });
+
+    if (this.state.isSuccess) {
+      this.setState({
+        showSuccess:
+          "Congratulations! Records from excel file have been added.",
+        isProcessing: false,
+      });
+    }
   };
 
   render() {
