@@ -46,7 +46,9 @@ class Dashboard extends React.PureComponent {
               workbook.Sheets[firstSheet],
               { raw: false, dateNF: "yyyy-mm-dd" }
             );
-            this.setState({ records: [...excelRows] });
+            this.setState({
+              records: [...excelRows],
+            });
             console.log(excelRows);
           };
           reader.readAsBinaryString(fileImport);
@@ -71,7 +73,7 @@ class Dashboard extends React.PureComponent {
       showSuccess: "",
     });
 
-    this.state.records.forEach(async (record) => {
+    this.state.records.map(async (record) => {
       /*
       try {
         await schema.validate(record, {
@@ -89,21 +91,21 @@ class Dashboard extends React.PureComponent {
       recordClone.Quantity = parseInt(recordClone.Quantity);
 
       try {
-        this.setState({ validationErrors: {} });
+        this.setState({ validationErrors: {}, isSuccess: true });
         await RecordApi.createRecord(recordClone);
-        this.setState({ isSuccess: true });
+        this.setState({
+          showSuccess:
+            "Congratulations! Records from excel file have been added.",
+        });
       } catch (e) {
-        this.setState({ error: e.data, isProcessing: false, isSuccess: false });
+        this.setState({
+          error: e.data,
+          isProcessing: false,
+          isSuccess: false,
+          showSuccess: "",
+        });
       }
     });
-
-    if (this.state.isSuccess) {
-      this.setState({
-        showSuccess:
-          "Congratulations! Records from excel file have been added.",
-        isProcessing: false,
-      });
-    }
   };
 
   render() {
