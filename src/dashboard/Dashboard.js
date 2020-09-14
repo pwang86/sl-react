@@ -42,8 +42,9 @@ class Dashboard extends React.PureComponent {
           reader.onload = (e) => {
             const workbook = XLSX.read(reader.result, { type: "binary" });
             const firstSheet = workbook.SheetNames[0];
-            const excelRows = XLSX.utils.sheet_to_row_object_array(
-              workbook.Sheets[firstSheet]
+            const excelRows = XLSX.utils.sheet_to_json(
+              workbook.Sheets[firstSheet],
+              { raw: false, dateNF: "yyyy-mm-dd" }
             );
             this.setState({ records: [...excelRows] });
             console.log(excelRows);
@@ -76,8 +77,14 @@ class Dashboard extends React.PureComponent {
         return;
       }
       */
-      let recordClone = record;
+
+      let recordClone = Object.assign({}, record);
       recordClone.Date += "T00:00:00";
+      recordClone.Version = parseFloat(recordClone.Version);
+      recordClone.Quantity = parseInt(recordClone.Quantity);
+      recordClone.IsTPG = "false";
+      recordClone.IsNZ = "false";
+
       try {
         this.setState({ validationErrors: {} });
         await RecordApi.createRecord(recordClone);
