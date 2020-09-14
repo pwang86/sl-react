@@ -73,6 +73,7 @@ class Dashboard extends React.PureComponent {
       showSuccess: "",
     });
 
+    let existedLocation = [];
     this.state.records.map(async (record) => {
       /*
       try {
@@ -89,6 +90,7 @@ class Dashboard extends React.PureComponent {
       recordClone.Date += "T00:00:00";
       recordClone.Version = parseFloat(recordClone.Version);
       recordClone.Quantity = parseInt(recordClone.Quantity);
+      existedLocation.push(recordClone.Location);
 
       try {
         this.setState({ validationErrors: {}, isSuccess: true });
@@ -97,9 +99,10 @@ class Dashboard extends React.PureComponent {
           showSuccess:
             "Congratulations! Records from excel file have been added.",
         });
+        existedLocation.pop();
       } catch (e) {
         this.setState({
-          error: e.data,
+          error: "Please check location: " + existedLocation.join(","),
           isProcessing: false,
           isSuccess: false,
           showSuccess: "",
