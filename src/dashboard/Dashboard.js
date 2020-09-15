@@ -74,7 +74,8 @@ class Dashboard extends React.PureComponent {
     });
 
     let existedLocation = [];
-    this.state.records.map(async (record) => {
+    let count = 0;
+    let requests = this.state.records.map(async (record) => {
       /*
       try {
         await schema.validate(record, {
@@ -94,15 +95,31 @@ class Dashboard extends React.PureComponent {
 
       try {
         this.setState({ validationErrors: {}, isSuccess: true });
-        await RecordApi.createRecord(recordClone);
-        this.setState({
-          showSuccess:
-            "Congratulations! Records from excel file have been added.",
-        });
-        existedLocation.pop();
+        let response = await RecordApi.createRecord(recordClone);
+        let result = await response.status;
+        if (result === 200) {
+          existedLocation.pop();
+          count++;
+        }
       } catch (e) {
         this.setState({
-          error: "Please check location: " + existedLocation.join(","),
+          isProcessing: false,
+          isSuccess: false,
+          showSuccess: "",
+        });
+      }
+    });
+
+    Promise.all(requests).then(() => {
+      if (count === this.state.records.length) {
+        this.setState({
+          isProcessing: false,
+          showSuccess:
+            "Congratulations! Records from excel file have been added.",
+        });
+      } else {
+        this.setState({
+          error: "Please check location: " + existedLocation.join(","),
           isProcessing: false,
           isSuccess: false,
           showSuccess: "",
@@ -117,7 +134,7 @@ class Dashboard extends React.PureComponent {
         {this.state.error && (
           <Notification type="danger">{this.state.error}</Notification>
         )}
-        {this.state.isSuccess && (
+        {this.state.showSuccess && (
           <Notification type="warning">{this.state.showSuccess}</Notification>
         )}
         <h1 className="title sl-dashboard__title has-text-grey">
