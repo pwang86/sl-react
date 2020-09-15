@@ -59,7 +59,7 @@ export function createRecord(record) {
             // console.log(response.data);
             reject(response);
           } else {
-            resolve(response.data);
+            resolve(response);
           }
         } else {
           reject(response.response);
