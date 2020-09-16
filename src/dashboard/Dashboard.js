@@ -5,6 +5,7 @@ import "./Dashboard.scss";
 import * as XLSX from "xlsx";
 import Notification from "../common/Notification";
 import * as RecordApi from "../record/RecordApi";
+import classnames from "classnames";
 // import { getValidationErrors } from "../common/helper";
 /*
 const schema = yup.object().shape({
@@ -179,8 +180,10 @@ class Dashboard extends React.PureComponent {
               </div>
               <div className="content">
                 <button
-                  className="button is-primary dashboard-btn"
-                  is-loading={this.setState.isProcessing}
+                  className={classnames("button is-primary dashboard-btn", {
+                    "is-loading": this.setState.isProcessing,
+                    "is-static": this.state.records.length === 0,
+                  })}
                   onClick={this.handleProcess}
                 >
                   <svg>
