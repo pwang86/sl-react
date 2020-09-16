@@ -181,7 +181,7 @@ class Dashboard extends React.PureComponent {
               <div className="content">
                 <button
                   className={classnames("button is-primary dashboard-btn", {
-                    "is-loading": this.setState.isProcessing,
+                    "is-loading": this.state.isProcessing,
                     "is-static": this.state.records.length === 0,
                   })}
                   onClick={this.handleProcess}
