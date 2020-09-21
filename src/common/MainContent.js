@@ -10,10 +10,7 @@ function MainContent({ children, className, ...other }) {
     <React.Fragment>
       <NavBar />
       <SideNav />
-      <div
-        className={classnames("container sl-main-content", className)}
-        {...other}
-      >
+      <div className={classnames("sl-main-content", className)} {...other}>
         {children}
       </div>
     </React.Fragment>
@@ -22,7 +19,7 @@ function MainContent({ children, className, ...other }) {
 
 MainContent.propTypes = {
   children: PropTypes.node,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default MainContent;
