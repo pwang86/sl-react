@@ -90,6 +90,8 @@ class Dashboard extends React.PureComponent {
 
       let recordClone = Object.assign({ IsNZ: false, IsTPG: false }, record);
       recordClone.Date += "T00:00:00";
+      recordClone.Model = recordClone.Model.toUpperCase();
+      recordClone.Location = recordClone.Location.toUpperCase();
       recordClone.Version = parseFloat(recordClone.Version);
       recordClone.Quantity = parseInt(recordClone.Quantity);
       existedLocation.push(recordClone.Location);
