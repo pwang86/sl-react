@@ -3,8 +3,10 @@ import { pick } from "lodash/object";
 
 export function getRecords(pageNumber = 1) {
   return new Promise((resolve, reject) => {
+    // if displaying more items (default is 10) on the page, go to
+    // RecordController.cs in C sharp to change PageSize.
     axios
-      .get(`/api/record?pageNumber=${pageNumber}`)
+      .get(`/api/record?pageNumber=${pageNumber}`)  
       .then((response) => {
         if (response.status >= 200 && response.status < 300) {
           resolve(response.data);
